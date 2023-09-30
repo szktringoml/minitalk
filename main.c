@@ -22,5 +22,6 @@ int	main(void)
 	write(1, &c, 1);
 	c = 130;
 	write(1, &c, 1);
+
 	return (0);
 }

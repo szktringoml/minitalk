@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+void error_handler(int argc, pid_t pid);
+
 void	siguser1_kill(pid_t pid);
 
 void	siguser2_kill(pid_t pid);

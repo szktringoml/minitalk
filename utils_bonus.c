@@ -16,7 +16,7 @@ void	siguser1_kill(pid_t pid)
 {
 	if (kill(pid, SIGUSER1) == -1)
 	{
-		write(STDERR, "kill Error\n", 13);
+		write(STDERR, "kill Error\n", 11);
 		exit(1);
 	}
 }
@@ -25,7 +25,7 @@ void	siguser2_kill(pid_t pid)
 {
 	if (kill(pid, SIGUSER2) == -1)
 	{
-		write(STDERR, "kill Error\n", 13);
+		write(STDERR, "kill Error\n", 11);
 		exit(1);
 	}
 }
@@ -34,7 +34,7 @@ void	null_terminated_char_submit(pid_t pid)
 {
 	if (kill(pid, SIGUSER2) == -1)
 	{
-		write(STDERR, "kill Error\n", 13);
+		write(STDERR, "kill Error\n", 11);
 		exit(1);
 	}
 	usleep(10);

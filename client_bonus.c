@@ -74,15 +74,27 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 //	}
 //}
 
-int	main(int argc, char *argv[])
+void error_handler(int argc, pid_t pid)
 {
-	struct sigaction	s_sigaction;
-
+	if (pid < 0)
+	{
+		write(STDERR, "pid Error\n", 10);
+		exit(1);
+	}
 	if (argc != 3)
 	{
 		write(STDERR, "input Error\n", 12);
 		exit(1);
 	}
+}
+
+int	main(int argc, char *argv[])
+{
+	struct sigaction	s_sigaction;
+	pid_t pid;
+	
+	pid = (pid_t)ft_atoi(argv[1]);
+	error_handler(argc, pid);
 	s_sigaction.sa_mask = sigemptyset(&s_sigaction.sa_mask);
 	s_sigaction.sa_flags = SA_SIGINFO;
 	s_sigaction.sa_sigaction = ft_handler_from_server;
@@ -93,7 +105,7 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	g_str = (unsigned char *)argv[2];
-	ft_send_message((const unsigned char *)g_str, (pid_t)ft_atoi(argv[1]));
+	ft_send_message((const unsigned char *)g_str, pid);
 	while (1)
 		pause();
 	exit(0);

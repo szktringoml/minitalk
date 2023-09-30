@@ -23,7 +23,7 @@ void	siguser1_kill(pid_t pid, int *shift)
 	}
 	if (kill(pid, SIGUSER1) == -1)
 	{
-		write(STDERR, "kill Error\n", 13);
+		write(STDERR, "kill Error\n", 11);
 		exit(1);
 	}
 }
@@ -32,7 +32,7 @@ void	siguser2_kill(pid_t pid)
 {
 	if (kill(pid, SIGUSER2) == -1)
 	{
-		write(STDERR, "kill Error\n", 13);
+		write(STDERR, "kill Error\n", 11);
 		exit(1);
 	}
 }
@@ -41,7 +41,7 @@ void	null_terminated_char_submit(pid_t pid)
 {
 	if (kill(pid, SIGUSER2) == -1)
 	{
-		write(STDERR, "kill Error\n", 13);
+		write(STDERR, "kill Error\n", 11);
 		exit(1);
 	}
 	usleep(10);
@@ -90,16 +90,27 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 //	}
 //}
 
-int	main(int argc, char *argv[])
+void error_handler(int argc, pid_t pid)
 {
-	unsigned char	*str;
-
-	str = (unsigned char *)argv[2];
+	if (pid < 0)
+	{
+		write(STDERR, "pid Error\n", 10);
+		exit(1);
+	}
 	if (argc != 3)
 	{
 		write(STDERR, "input Error\n", 12);
 		exit(1);
 	}
-	ft_send_message((const unsigned char *)str, (pid_t)ft_atoi(argv[1]));
+}
+
+int	main(int argc, char *argv[])
+{
+	unsigned char	*str;
+	pid_t pid;
+	
+	pid = (pid_t)ft_atoi(argv[1]);
+	error_handler(argc, pid);
+	ft_send_message((const unsigned char *)str, pid);
 	exit(0);
 }
