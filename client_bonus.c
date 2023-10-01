@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:26:00 by string            #+#    #+#             */
-/*   Updated: 2023/09/29 14:40:30 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 10:47:58 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 
 void error_handler(int argc, pid_t pid)
 {
-	if (pid < 0)
+	if (pid < 2)
 	{
 		write(STDERR, "pid Error\n", 10);
 		exit(1);

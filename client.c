@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:25:36 by string            #+#    #+#             */
-/*   Updated: 2023/09/29 14:40:34 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:12:08 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 
 	while (*str)
 	{
+		printf("1\n");
 		if ((*str >> shift) % 2 == 1)
 			siguser1_kill(pid, &shift);
 		if ((*str >> shift) % 2 == 0)
@@ -67,6 +68,7 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 		usleep(120);
 	}
 	sleep(1);
+	printf("2\n");
 	while (i--)
 		null_terminated_char_submit(pid);
 }
@@ -92,7 +94,7 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 
 void error_handler(int argc, pid_t pid)
 {
-	if (pid < 0)
+	if (pid < 2)
 	{
 		write(STDERR, "pid Error\n", 10);
 		exit(1);
@@ -108,9 +110,10 @@ int	main(int argc, char *argv[])
 {
 	unsigned char	*str;
 	pid_t pid;
-	
 	pid = (pid_t)ft_atoi(argv[1]);
+	str = 
 	error_handler(argc, pid);
 	ft_send_message((const unsigned char *)str, pid);
+	printf("3\n");
 	exit(0);
 }
