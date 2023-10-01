@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:25:36 by string            #+#    #+#             */
-/*   Updated: 2023/10/01 11:12:08 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:16:43 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ int	main(int argc, char *argv[])
 	unsigned char	*str;
 	pid_t pid;
 	pid = (pid_t)ft_atoi(argv[1]);
-	str = 
 	error_handler(argc, pid);
+	str = argv[2];
 	ft_send_message((const unsigned char *)str, pid);
 	printf("3\n");
 	exit(0);
