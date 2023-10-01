@@ -6,36 +6,12 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:25:36 by string            #+#    #+#             */
-/*   Updated: 2023/10/01 11:16:43 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:32:36 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
 #include "libftex/libft.h"
-
-void	siguser1_kill(pid_t pid, int *shift)
-{
-	(void)shift;
-	if (*shift == 7)
-	{
-		write(STDERR, "Only supports ASCII characters\n", 31);
-		exit(1);
-	}
-	if (kill(pid, SIGUSER1) == -1)
-	{
-		write(STDERR, "kill Error\n", 11);
-		exit(1);
-	}
-}
-
-void	siguser2_kill(pid_t pid)
-{
-	if (kill(pid, SIGUSER2) == -1)
-	{
-		write(STDERR, "kill Error\n", 11);
-		exit(1);
-	}
-}
+#include "minitalk.h"
 
 void	null_terminated_char_submit(pid_t pid)
 {
@@ -49,12 +25,13 @@ void	null_terminated_char_submit(pid_t pid)
 
 void	ft_send_message(const unsigned char *str, pid_t pid)
 {
-	static int	shift = 7;
-	static int	i = 8;
+	static int	shift;
+	static int	i;
 
+	shift = 7;
+	i = 8;
 	while (*str)
 	{
-		printf("1\n");
 		if ((*str >> shift) % 2 == 1)
 			siguser1_kill(pid, &shift);
 		if ((*str >> shift) % 2 == 0)
@@ -68,7 +45,6 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 		usleep(120);
 	}
 	sleep(1);
-	printf("2\n");
 	while (i--)
 		null_terminated_char_submit(pid);
 }
@@ -92,28 +68,14 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 //	}
 //}
 
-void error_handler(int argc, pid_t pid)
-{
-	if (pid < 2)
-	{
-		write(STDERR, "pid Error\n", 10);
-		exit(1);
-	}
-	if (argc != 3)
-	{
-		write(STDERR, "input Error\n", 12);
-		exit(1);
-	}
-}
-
 int	main(int argc, char *argv[])
 {
 	unsigned char	*str;
-	pid_t pid;
+	pid_t			pid;
+
 	pid = (pid_t)ft_atoi(argv[1]);
 	error_handler(argc, pid);
-	str = argv[2];
+	str = (unsigned char *)argv[2];
 	ft_send_message((const unsigned char *)str, pid);
-	printf("3\n");
 	exit(0);
 }

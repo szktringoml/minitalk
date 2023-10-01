@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:25:54 by string            #+#    #+#             */
-/*   Updated: 2023/09/29 14:45:49 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:33:32 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void error_handler(int argc, pid_t pid);
+void	error_handler(int argc, pid_t pid);
 
 void	siguser1_kill(pid_t pid);
 

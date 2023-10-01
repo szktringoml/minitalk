@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: string <string>                            +#+  +:+       +#+        */
+/*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 07:58:25 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/07/03 08:17:33 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:26:01 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@
 #  define BUFFER_SIZE 20
 # endif
 
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-void	ft_bzero(void *s, size_t n);
-char	*ft_strjoin(char *input, char *str);
-void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_gnlstrchr(const char *s, int c);
+char	*ft_gnlstrjoin(char *input, char *str);
 char	*get_next_line(int fd);
 char	*ft_input_each_fd(int fd, char *input);
 char	*ft_getline(char *input);

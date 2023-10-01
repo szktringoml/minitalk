@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 08:03:26 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/09/29 13:43:46 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:27:41 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,6 @@ char	*ft_gnlstrchr(const char *s, int c)
 	if ((char)c == '\0')
 		return ((char *)(s + i));
 	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
 }
 
 char	*ft_gnlstrjoin(char *input, char *str)

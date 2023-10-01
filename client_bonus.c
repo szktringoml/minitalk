@@ -6,12 +6,12 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:26:00 by string            #+#    #+#             */
-/*   Updated: 2023/10/01 10:47:58 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:38:18 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
 #include "libftex/libft.h"
+#include "minitalk_bonus.h"
 
 unsigned char	*g_str;
 
@@ -24,7 +24,7 @@ void	ft_handler_from_server(int sig, siginfo_t *info, void *context)
 	(void)sig;
 	(void)context;
 	(void)info;
-	len = ft_strlen(g_str);
+	len = ft_strlen((const char *)g_str);
 	write(1, "\nCaught a signal from the server\n", 33);
 	write(1, "---------input message---------\n", 32);
 	write(1, g_str, len);
@@ -33,9 +33,11 @@ void	ft_handler_from_server(int sig, siginfo_t *info, void *context)
 
 void	ft_send_message(const unsigned char *str, pid_t pid)
 {
-	static int	shift = 7;
-	static int	i = 8;
+	static int	shift;
+	static int	i;
 
+	shift = 7;
+	i = 8;
 	while (*str)
 	{
 		if ((*str >> shift) % 2 == 1)
@@ -74,7 +76,7 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 //	}
 //}
 
-void error_handler(int argc, pid_t pid)
+void	error_handler(int argc, pid_t pid)
 {
 	if (pid < 2)
 	{
@@ -91,8 +93,8 @@ void error_handler(int argc, pid_t pid)
 int	main(int argc, char *argv[])
 {
 	struct sigaction	s_sigaction;
-	pid_t pid;
-	
+	pid_t				pid;
+
 	pid = (pid_t)ft_atoi(argv[1]);
 	error_handler(argc, pid);
 	s_sigaction.sa_mask = sigemptyset(&s_sigaction.sa_mask);

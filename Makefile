@@ -6,12 +6,12 @@
 #    By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:11:34 by string            #+#    #+#              #
-#    Updated: 2023/09/29 15:54:13 by kousuzuk         ###   ########.fr        #
+#    Updated: 2023/10/01 11:37:32 by kousuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_SRV = server.c 
-SRC_CLT = client.c
+SRC_CLT = client.c utils.c
 BONUS_SRV = server_bonus.c
 BONUS_CLT = client_bonus.c utils_bonus.c
 
@@ -26,7 +26,7 @@ OBJS_NAME_CLT = client
 BONUS_OBJS_NAME_SRV = server_bonus
 BONUS_OBJS_NAME_CLT = client_bonus
 
-LIBFT = libft.a
+LIBFT = libftex/libft.a
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 
@@ -34,7 +34,6 @@ all: $(LIBFT) $(OBJS_NAME_SRV) $(OBJS_NAME_CLT)
 
 $(LIBFT):
 	make -C libftex
-	mv libftex/libft.a .
 
 %.o: %.c 
 	$(CC) $(FLAGS) -c $< -o $@
@@ -47,10 +46,10 @@ $(OBJS_NAME_CLT): $(SRV_OBJS)
 	$(CC) $(FLAGS) -o $@ $(SRC_CLT) $(LIBFT)
 	
 $(BONUS_OBJS_NAME_SRV): $(LIBFT) $(SRV_OBJS)
-	$(CC) $(FLAGS) -c $(BONUS_SRV) $(LIBFT)
+	$(CC) $(FLAGS) -c $(BONUS_SRV) 
 	$(CC) $(FLAGS) -o $@ $(SRV_BONUS_OBJS) $(LIBFT)
 $(BONUS_OBJS_NAME_CLT): $(LIBFT) $(SRV_OBJS)
-	$(CC) $(FLAGS) -c $(BONUS_CLT) $(LIBFT)
+	$(CC) $(FLAGS) -c $(BONUS_CLT)
 	$(CC) $(FLAGS) -o $@ $(CLT_BONUS_OBJS) $(LIBFT)
 
 bonus: $(LIBFT) $(BONUS_OBJS_NAME_SRV) $(BONUS_OBJS_NAME_CLT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: string <string>                            +#+  +:+       +#+        */
+/*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 07:57:22 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/07/03 12:22:00 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:23:45 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,23 +104,24 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-#include <fcntl.h>
-#include <libc.h>
-	__attribute__((destructor)) static void destructor()
- {
- 	system("leaks -q a.out");
- }
+// #include <fcntl.h>
+// #include <libc.h>
 
- int	main(void)
- {
-	printf("totunyuu");
- 	int	fd;
+// __attribute__((destructor)) static void destructor()
+// {
+// 	system("leaks -q a.out");
+// }
 
- 	fd = open("file", O_RDWR);
-	if(fd < 0)
-		printf("fail");
-	//fd = 0;
-	printf("aaa");
- 	printf("output = %s\n", get_next_line(0));
-	return 0;
- }
+// int	main(void)
+// {
+// 	int	fd;
+
+// 	printf("totunyuu");
+// 	fd = open("file", O_RDWR);
+// 	if (fd < 0)
+// 		printf("fail");
+// 	//fd = 0;
+// 	printf("aaa");
+// 	printf("output = %s\n", get_next_line(0));
+// 	return (0);
+// }
