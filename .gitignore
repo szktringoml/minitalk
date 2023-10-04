@@ -1,0 +1,4 @@
+minitalk_bit_receive_notice_version
+*.o
+server
+client
