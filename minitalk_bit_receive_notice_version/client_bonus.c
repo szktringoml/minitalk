@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:26:00 by string            #+#    #+#             */
-/*   Updated: 2023/10/04 11:34:07 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:17:22 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftex/libft.h"
 #include "minitalk_bonus.h"
 
 unsigned char	*g_str;
@@ -24,7 +23,7 @@ void	ft_handler_from_server(int sig, siginfo_t *info, void *context)
 	(void)sig;
 	(void)context;
 	(void)info;
-	len = ft_strlen((const char *)g_str);
+	len = ft_strlen(g_str);
 	write(1, "\nCaught a signal from the server\n", 33);
 	write(1, "---------input message---------\n", 32);
 	write(1, g_str, len);
@@ -33,11 +32,9 @@ void	ft_handler_from_server(int sig, siginfo_t *info, void *context)
 
 void	ft_send_message(const unsigned char *str, pid_t pid)
 {
-	static int	shift;
-	static int	i;
+	static int	shift = 7;
+	static int	i = 8;
 
-	shift = 7;
-	i = 8;
 	while (*str)
 	{
 		if ((*str >> shift) % 2 == 1)
@@ -79,10 +76,12 @@ void	ft_send_message(const unsigned char *str, pid_t pid)
 int	main(int argc, char *argv[])
 {
 	struct sigaction	s_sigaction;
-	pid_t				pid;
 
-	pid = (pid_t)ft_atoi(argv[1]);
-	error_handler(argc, pid);
+	if (argc != 3)
+	{
+		write(STDERR, "input Error\n", 12);
+		exit(1);
+	}
 	s_sigaction.sa_mask = sigemptyset(&s_sigaction.sa_mask);
 	s_sigaction.sa_flags = SA_SIGINFO;
 	s_sigaction.sa_sigaction = ft_handler_from_server;
@@ -93,7 +92,7 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	g_str = (unsigned char *)argv[2];
-	ft_send_message((const unsigned char *)g_str, pid);
+	ft_send_message((const unsigned char *)g_str, (pid_t)ft_atoi(argv[1]));
 	while (1)
 		pause();
 	exit(0);

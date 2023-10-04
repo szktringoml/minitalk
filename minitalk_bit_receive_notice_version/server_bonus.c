@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:55:37 by string            #+#    #+#             */
-/*   Updated: 2023/10/04 11:33:59 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:17:48 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
-#include "libftex/libft.h"
 
 void	null_terminated_char_notice(pid_t pid)
 {
@@ -56,9 +55,9 @@ int	main(void)
 	s_sigaction.sa_flags = SA_SIGINFO;
 	s_sigaction.sa_sigaction = ft_handler_from_client;
 	pid = getpid();
-	ft_printf("server pid = %i\n", pid);
+	printf("server pid = %i\n", pid);
 	if (sigaction(SIGUSER1, &s_sigaction, NULL) == -1 || sigaction(SIGUSER2,
-			&s_sigaction, NULL) == -1)
+			&s_sigaction, NULL))
 	{
 		write(STDERR, "sigaction Error\n", 16);
 		exit(1);
